@@ -6,7 +6,7 @@
 <title>نظام إدارة التقارير</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap">
 <style>
-:root{--bg:#eef2f5;--ink:#1d3b53;--line:#8fb8b3;--ac:#2f6f63;--card:#fff;--mut:#6b7f8c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{--ih:240px;--fit:cover;--bg:#eef2f5;--ink:#1d3b53;--line:#8fb8b3;--ac:#2f6f63;--card:#fff;--mut:#6b7f8c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121a20;--ink:#dbe8f0;--card:#1b262e;--mut:#97a9b5}}
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
@@ -25,7 +25,10 @@ button.d{background:#27455f;border-color:#27455f;color:#fff}
 .ct input{background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.7);color:#fff;text-align:center;width:90%;font:inherit;font-size:17px;margin:4px 0;padding:4px;border-radius:0}
 .ct input::placeholder{color:rgba(255,255,255,.7)}
 .bd{padding:26px 24px;display:flex;flex-direction:column;gap:22px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.row{display:grid;grid-template-columns:.8fr 1.2fr;gap:18px}
+.tools{max-width:900px;margin:0 auto 14px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;background:var(--card);border-radius:14px;padding:10px 16px}
+.tools select{width:auto;padding:6px 10px;border-radius:10px;background:var(--card);color:var(--ink);border-color:var(--line)}
+.tools input{width:180px;padding:0;border:0}
 .col{display:flex;flex-direction:column;gap:14px}
 .r1{grid-template-columns:200px 1fr}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -36,8 +39,8 @@ textarea{resize:none;min-height:220px;line-height:1.7}
 h3{margin:0 0 12px;text-align:center;font-size:19px;padding-bottom:8px;border-bottom:2px solid var(--line)}
 .ev{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .eb{border:2px solid var(--line);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:8px;break-inside:avoid;page-break-inside:avoid;position:relative}
-.im{height:240px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#6b8a92;cursor:pointer;background:#f6faf9;overflow:hidden;text-align:center;font-size:14px}
-.im img{width:100%;height:100%;object-fit:contain}
+.im{height:var(--ih);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#6b8a92;cursor:pointer;background:#f6faf9;overflow:hidden;text-align:center;font-size:14px}
+.im img{width:100%;height:100%;object-fit:var(--fit)}
 .im span{font-size:34px;display:block;line-height:1}
 .eb input{border-width:1.5px;padding:8px 12px;font-size:14px}
 .x{position:absolute;top:6px;left:6px;padding:2px 9px;border-radius:99px;border-color:#c66;color:#c66;background:#fff}
@@ -51,11 +54,23 @@ h3{margin:0 0 12px;text-align:center;font-size:19px;padding-bottom:8px;border-bo
 #t{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:#27455f;color:#fff;padding:10px 20px;border-radius:99px;display:none;z-index:9}
 @media(max-width:640px){.hd{grid-template-columns:90px 1fr 90px;padding:14px}.hd .lg,.hd .lg img{height:60px;max-width:90px}.row,.r1,.ev,.sg{grid-template-columns:1fr}.ct b{font-size:16px}.ct input{font-size:14px}}
 @media print{
- @page{size:A4;margin:8mm}
- body{background:#fff;padding:0}
- .bar,#ar,h1,#t,.x,.add{display:none!important}
- .sheet{box-shadow:none;border-radius:0;max-width:none}
- .ct input,input,select,textarea{border-color:#8fb8b3}
+ @page{size:A4;margin:7mm}
+ html,body{background:#fff;padding:0;margin:0}
+ .bar,.tools,#ar,h1,#t,.x,.add{display:none!important}
+ .sheet{box-shadow:none;border-radius:0;max-width:none;overflow:visible}
+ .hd{padding:12px 18px;gap:10px}
+ .hd .lg,.hd .lg img{height:78px}
+ .bd{padding:14px 18px;gap:12px}
+ .row{gap:14px}.col{gap:9px}.two{gap:10px}
+ label{margin-bottom:3px;font-size:14px}
+ input,select,textarea{padding:6px 11px;border-radius:11px}
+ textarea{min-height:0;overflow:hidden}
+ h3{margin-bottom:8px;padding-bottom:5px;font-size:17px}
+ .ev{gap:12px}
+ .eb{padding:7px;gap:6px}
+ .im{height:calc(var(--ih)*.62)}
+ .eb input{padding:5px 10px}
+ .sg{gap:14px;padding-top:10px}
  .ct input{border:0;border-bottom:1px solid #fff}
  .im:not(:has(img)){visibility:hidden}
  select{appearance:none}
@@ -72,6 +87,10 @@ h3{margin:0 0 12px;text-align:center;font-size:19px;padding-bottom:8px;border-bo
  <button id="im">فتح ملف محفوظ</button>
  <button class="d" id="pd">تصدير PDF</button>
  <input type="file" id="fi" accept=".json" hidden>
+</div>
+<div class="tools">
+ <label style="margin:0">حجم مربعات الصور</label><input type="range" id="ih" min="100" max="420" step="10" value="240">
+ <label style="margin:0">عرض الصورة</label><select id="ft"><option value="cover">ملء الإطار</option><option value="contain">الصورة كاملة</option></select>
 </div>
 <div id="ar"><h3>الأرشيف</h3><div id="al"></div></div>
 
@@ -124,8 +143,10 @@ function renderEv(){const w=$('#ev');w.innerHTML='';ev.forEach((e,i)=>{const b=d
  b.querySelector('.x').onclick=()=>{ev.splice(i,1);renderEv()};
  b.querySelector('.im').onclick=()=>{const f=document.createElement('input');f.type='file';f.accept='image/*';f.onchange=()=>{const r=new FileReader();r.onload=()=>{e.img=r.result;renderEv()};r.readAsDataURL(f.files[0])};f.click()};
  w.appendChild(b)})}
-const get=()=>{const d={id:cur||('r'+Date.now()),saved:Date.now(),ev};fields().forEach(f=>d[f.dataset.k]=f.value);return d};
-const set=d=>{cur=d.id;fields().forEach(f=>f.value=d[f.dataset.k]||(f.tagName=='SELECT'?f.options[0].value:''));ev=d.ev&&d.ev.length?d.ev:[{},{},{},{}];renderEv();grow();tl()};
+const sz=()=>{const r=document.documentElement.style;r.setProperty('--ih',$('#ih').value+'px');r.setProperty('--fit',$('#ft').value)};
+$('#ih').oninput=sz;$('#ft').onchange=sz;
+const get=()=>{const d={id:cur||('r'+Date.now()),saved:Date.now(),ev,ih:$('#ih').value,fit:$('#ft').value};fields().forEach(f=>d[f.dataset.k]=f.value);return d};
+const set=d=>{cur=d.id;fields().forEach(f=>f.value=d[f.dataset.k]||(f.tagName=='SELECT'?f.options[0].value:''));ev=d.ev&&d.ev.length?d.ev:[{},{},{},{}];$('#ih').value=d.ih||240;$('#ft').value=d.fit||'cover';sz();renderEv();grow();tl()};
 const tl=()=>{const v=$('[data-k=type]').value;$('#nl').textContent=v=='اسم التقرير'?v:'اسم '+v;$('[data-k=name]').placeholder='اكتب '+$('#nl').textContent};
 $('[data-k=type]').onchange=tl;
 $('#ae').onclick=()=>{ev.push({});renderEv()};
