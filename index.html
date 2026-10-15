@@ -41,7 +41,7 @@ h3{margin:0 0 12px;text-align:center;font-size:19px;padding-bottom:8px;border-bo
 .eb{border:2px solid var(--line);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:8px;break-inside:avoid;page-break-inside:avoid;position:relative}
 .im{height:var(--ih);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#6b8a92;cursor:pointer;background:#f6faf9;overflow:hidden;text-align:center;font-size:14px}
 .im{position:relative;container-type:size;cursor:grab}
-.im img{position:absolute;left:50%;top:50%;object-fit:var(--fit);max-width:none;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.im img{position:absolute;left:50%;top:50%;max-width:none;user-select:none;-webkit-user-drag:none;pointer-events:none}
 .tb{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
 .tb button{touch-action:manipulation;padding:5px 9px;font-size:13px;border-radius:9px;border-color:var(--line);color:#1d3b53;background:#fff}
 .eb input[type=range]{padding:0;border:0;flex:1 1 100%;height:22px}
@@ -144,16 +144,18 @@ const fields=()=>[...document.querySelectorAll('[data-k]')];
 const grow=()=>{const a=$('[data-k=tasks]');a.style.height='auto';a.style.height=Math.max(220,a.scrollHeight)+'px'};
 $('[data-k=tasks]').addEventListener('input',grow);
 const CQ=!!(window.CSS&&CSS.supports&&CSS.supports('width','1cqw'));
-const rot=(i,e)=>{if(!i)return;const r=((e.r||0)%360+360)%360,q=r%180,im=i.parentNode;let W='100%',H='100%',u='%',v='%',x=e.x||0,y=e.y||0;
- if(q){if(CQ){W='100cqh';H='100cqw';u='cqw';v='cqh'}else{const w=im.clientWidth,h=im.clientHeight;W=h+'px';H=w+'px';u=v='px';x=x*w/100;y=y*h/100}}
- i.style.width=W;i.style.height=H;
+const rot=(i,e)=>{if(!i)return;const r=((e.r||0)%360+360)%360,q=r%180,im=i.parentNode,ar=(i.naturalWidth&&i.naturalHeight)?i.naturalWidth/i.naturalHeight:(e.ar||1.5),f=$('#ft').value=='cover'?'max':'min';
+ let we,he,u='cqw',v='cqh',x=e.x||0,y=e.y||0;
+ if(CQ){const a=q?`${f}(100cqh,100cqw*${ar})`:`${f}(100cqw,100cqh*${ar})`;we=`calc(${a})`;he=`calc(${a}/${ar})`}
+ else{const W=im.clientWidth,H=im.clientHeight,w=q?Math[f](H,W*ar):Math[f](W,H*ar);we=w+'px';he=(w/ar)+'px';u=v='px';x=x*W/100;y=y*H/100}
+ i.style.width=we;i.style.height=he;
  i.style.transform=`translate(calc(-50% + ${x}${u}),calc(-50% + ${y}${v})) rotate(${r}deg) scale(${e.z||1})`};
 function pick(e){const f=document.createElement('input');f.type='file';f.accept='image/*';f.onchange=()=>{const r=new FileReader();r.onload=()=>{e.img=r.result;e.z=1;e.x=0;e.y=0;e.r=0;renderEv()};r.readAsDataURL(f.files[0])};f.click()}
 function renderEv(){const w=$('#ev');w.innerHTML='';ev.forEach((e,i)=>{const b=document.createElement('div');b.className='eb';
  b.innerHTML=`<button class="x" title="حذف">×</button><div class="im">${e.img?`<img src="${e.img}">`:`<div><span>+</span>إضافة صورة ${i+1}</div>`}</div>${e.img?`<div class="tb"><input type="range" min="30" max="400" value="${Math.round((e.z||1)*100)}" title="الحجم"><button data-a="u">↑</button><button data-a="d">↓</button><button data-a="l">←</button><button data-a="r">→</button><button data-a="rot">تدوير</button><button data-a="rs">ضبط</button><button data-a="ch">تغيير</button></div>`:''}<input class="cp" placeholder="وصف الشاهد (اختياري)">`;
  const inp=b.querySelector('.cp'),im=b.querySelector('.im'),tb=b.querySelector('.tb');inp.value=e.cap||'';inp.oninput=()=>e.cap=inp.value;
  b.querySelector('.x').onclick=()=>{ev.splice(i,1);renderEv()};
- rot(im.querySelector('img'),e);
+ {const g=im.querySelector('img');if(g){g.onload=()=>{e.ar=g.naturalWidth/g.naturalHeight;rot(g,e)};rot(g,e)}}
  if(!e.img)im.onclick=()=>pick(e);
  else{
   const sl=tb.querySelector('input');sl.oninput=()=>{e.z=sl.value/100;rot(im.querySelector('img'),e)};
@@ -169,7 +171,7 @@ function renderEv(){const w=$('#ev');w.innerHTML='';ev.forEach((e,i)=>{const b=d
  }
  w.appendChild(b)})}
 const sz=()=>{const r=document.documentElement.style;r.setProperty('--ih',$('#ih').value+'px');r.setProperty('--fit',$('#ft').value)};
-$('#ih').oninput=sz;$('#ft').onchange=sz;
+$('#ih').oninput=sz;$('#ft').onchange=()=>{sz();renderEv()};
 const get=()=>{const d={id:cur||('r'+Date.now()),saved:Date.now(),ev,ih:$('#ih').value,fit:$('#ft').value};fields().forEach(f=>d[f.dataset.k]=f.value);return d};
 const set=d=>{if(d.type=='اسم التقرير')d.type='تقرير';cur=d.id;fields().forEach(f=>f.value=d[f.dataset.k]||(f.tagName=='SELECT'?f.options[0].value:''));ev=d.ev&&d.ev.length?d.ev:[{},{},{},{}];$('#ih').value=d.ih||240;$('#ft').value=d.fit||'cover';sz();renderEv();grow();tl()};
 const tl=()=>{const v=$('[data-k=type]').value;$('#nl').textContent=v=='تقرير'?'اسم التقرير':'اسم '+v;$('[data-k=name]').placeholder='اكتب '+$('#nl').textContent};
