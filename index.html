@@ -6,23 +6,23 @@
 <title>نظام إدارة التقارير</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap">
 <style>
-:root{--ih:240px;--fit:cover;--bg:#eef2f5;--ink:#1d3b53;--line:#8fb8b3;--ac:#2f6f63;--card:#fff;--mut:#6b7f8c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{--ih:240px;--fit:cover;--ff:'Tajawal';--fw:400;--fs:1;--bg:#eef2f5;--ink:#1d3b53;--line:#8fb8b3;--ac:#2f6f63;--card:#fff;--mut:#6b7f8c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121a20;--ink:#dbe8f0;--card:#1b262e;--mut:#97a9b5}}
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Tajawal,Tahoma,sans-serif;padding:16px}
+body{line-height:1.75;margin:0;background:var(--bg);color:var(--ink);font-family:Tajawal,Tahoma,sans-serif;padding:16px}
 h1{text-align:center;font-size:30px;margin:6px 0 16px;font-weight:800}
 .bar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:18px}
 button{font:inherit;cursor:pointer;border-radius:12px;padding:11px 16px;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);font-weight:500}
 button.p{background:#58a08a;border-color:#58a08a;color:#fff}
 button.d{background:#27455f;border-color:#27455f;color:#fff}
-.sheet{background:#fff;color:#1d3b53;max-width:900px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.12);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet{font-family:var(--ff),Tajawal,Tahoma,sans-serif;font-weight:var(--fw);font-size:calc(16px*var(--fs));background:#fff;color:#1d3b53;max-width:900px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.12);-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .hd{display:grid;grid-template-columns:170px 1fr 170px;align-items:center;gap:12px;padding:20px 24px;color:#1d3b53;background:linear-gradient(120deg,#ffffff,#eef6f3);box-shadow:inset 0 -6px 0 #58a08a}
 .hd .lg{height:112px;display:flex;align-items:center;justify-content:center}
 .hd .lg img{image-rendering:auto;height:112px;width:auto;max-width:170px;object-fit:contain;background:transparent;border-radius:0;padding:0}
 .ct{text-align:center}
-.ct b{font-size:22px;display:block;margin-bottom:8px}
-.ct input{background:transparent;border:0;border-bottom:1.5px solid #8fb8b3;color:#1d3b53;text-align:center;width:90%;font:inherit;font-size:17px;margin:4px 0;padding:4px;border-radius:0}
+.ct b{font-size:1.375em;display:block;margin-bottom:8px}
+.ct input{background:transparent;border:0;border-bottom:1.5px solid #8fb8b3;color:#1d3b53;text-align:center;width:90%;font:inherit;line-height:1.9;font-size:1.06em;margin:4px 0;padding:6px 4px 4px;border-radius:0}
 .ct input::placeholder{color:#7f97a3}
 .bd{padding:26px 24px;display:flex;flex-direction:column;gap:22px}
 .row{display:grid;grid-template-columns:.8fr 1.2fr;gap:18px}
@@ -32,11 +32,13 @@ button.d{background:#27455f;border-color:#27455f;color:#fff}
 .col{display:flex;flex-direction:column;gap:14px}
 .r1{grid-template-columns:200px 1fr}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-label{display:block;font-weight:700;margin-bottom:6px;font-size:15px}
-input,select,textarea{width:100%;font:inherit;color:#1d3b53;background:#fff;border:2px solid var(--line);border-radius:14px;padding:11px 14px;outline:none}
+label{display:block;font-weight:700;margin-bottom:6px;font-size:.94em}
+.sheet label,.sheet h3,.sheet .ct b{font-weight:min(900,calc(var(--fw) + 300))}
+.sheet input,.sheet select,.sheet textarea{font-weight:var(--fw)}
+input,select,textarea{line-height:1.9;width:100%;font:inherit;color:#1d3b53;background:#fff;border:2px solid var(--line);border-radius:14px;padding:11px 14px;outline:none}
 input:focus,select:focus,textarea:focus{border-color:#2f6f63}
 textarea{resize:none;min-height:220px;line-height:1.7}
-h3{margin:0 0 12px;text-align:center;font-size:19px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+h3{margin:0 0 12px;text-align:center;font-size:1.19em;padding-bottom:8px;border-bottom:2px solid var(--line)}
 .ev{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .eb{border:2px solid var(--line);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:8px;break-inside:avoid;page-break-inside:avoid;position:relative}
 .im{height:var(--ih);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#6b8a92;cursor:pointer;background:#f6faf9;overflow:hidden;text-align:center;font-size:14px}
@@ -46,7 +48,7 @@ h3{margin:0 0 12px;text-align:center;font-size:19px;padding-bottom:8px;border-bo
 .tb button{touch-action:manipulation;padding:5px 9px;font-size:13px;border-radius:9px;border-color:var(--line);color:#1d3b53;background:#fff}
 .eb input[type=range]{padding:0;border:0;flex:1 1 100%;height:22px}
 .im span{font-size:34px;display:block;line-height:1}
-.eb input.cp{border-width:1.5px;padding:8px 12px;font-size:14px}
+.eb input.cp{border-width:1.5px;padding:8px 12px;font-size:.875em}
 .x{position:absolute;top:6px;left:6px;padding:2px 9px;border-radius:99px;border-color:#c66;color:#c66;background:#fff}
 .sg{display:grid;grid-template-columns:1fr 1fr;gap:18px;border-top:2px solid var(--line);padding-top:18px}
 .add{align-self:center}
@@ -56,7 +58,7 @@ h3{margin:0 0 12px;text-align:center;font-size:19px;padding-bottom:8px;border-bo
 .it div{flex:1}.it small{color:var(--mut)}
 .it button{padding:7px 12px}
 #t{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:#27455f;color:#fff;padding:10px 20px;border-radius:99px;display:none;z-index:9}
-@media(max-width:640px){.hd{grid-template-columns:100px 1fr 100px;padding:14px}.hd .lg,.hd .lg img{height:68px;max-width:100px}.row,.r1,.ev,.sg{grid-template-columns:1fr}.ct b{font-size:16px}.ct input{font-size:14px}}
+@media(max-width:640px){.hd{grid-template-columns:100px 1fr 100px;padding:14px}.hd .lg,.hd .lg img{height:68px;max-width:100px}.row,.r1,.ev,.sg{grid-template-columns:1fr}.ct b{font-size:1em}.ct input{font-size:.875em}}
 @media print{
  @page{size:A4;margin:7mm}
  html,body{background:#fff;padding:0;margin:0}
@@ -64,15 +66,17 @@ h3{margin:0 0 12px;text-align:center;font-size:19px;padding-bottom:8px;border-bo
  .sheet{box-shadow:none;border-radius:0;max-width:none;overflow:visible}
  .hd{padding:12px 18px;gap:10px}
  .hd .lg,.hd .lg img{height:90px}
+ .ct b{font-size:1.19em;margin-bottom:4px}
+ .ct input{font-size:.94em;line-height:1.7;margin:2px 0;padding:3px 4px}
  .bd{padding:14px 18px;gap:12px}
  .row{gap:14px}.col{gap:9px}.two{gap:10px}
- label{margin-bottom:3px;font-size:14px}
- input,select,textarea{padding:6px 11px;border-radius:11px}
+ label{margin-bottom:3px;font-size:.875em}
+ input,select,textarea{padding:5px 11px;line-height:1.9;border-radius:11px}
  textarea{min-height:0;overflow:hidden}
- h3{margin-bottom:8px;padding-bottom:5px;font-size:17px}
+ h3{margin-bottom:8px;padding-bottom:5px;font-size:1.06em}
  .ev{gap:12px}
  .eb{padding:7px;gap:6px}
- .im{height:calc(var(--ih)*.62)}
+ .im{height:calc(var(--ih)*.58)}
  .eb input.cp{padding:5px 10px}
  .sg{gap:14px;padding-top:10px}
  .ct input{border:0;border-bottom:1.5px solid #8fb8b3}
@@ -96,6 +100,9 @@ h3{margin:0 0 12px;text-align:center;font-size:19px;padding-bottom:8px;border-bo
 </div>
 <div class="tools">
  <label style="margin:0">حجم مربعات الصور</label><input type="range" id="ih" min="100" max="420" step="10" value="240">
+ <label style="margin:0">نوع الخط</label><select id="ff"><option value="Tajawal">تجوّل</option><option value="Cairo">القاهرة</option><option value="Almarai">المراعي</option><option value="Amiri">أميري</option><option value="Noto Naskh Arabic">نسخ</option><option value="Noto Kufi Arabic">كوفي</option><option value="Reem Kufi">ريم كوفي</option><option value="El Messiri">المسيري</option><option value="Changa">شنغا</option><option value="IBM Plex Sans Arabic">IBM Plex</option></select>
+ <label style="margin:0">سمك الخط</label><input type="range" id="fw" min="300" max="800" step="100" value="400">
+ <label style="margin:0">حجم الخط</label><input type="range" id="fs" min="80" max="130" step="5" value="100">
  <label style="margin:0">عرض الصورة</label><select id="ft"><option value="cover">ملء الإطار</option><option value="contain">الصورة كاملة</option></select>
 </div>
 <div id="ar"><h3>الأرشيف</h3><div id="al"></div></div>
@@ -170,10 +177,14 @@ function renderEv(){const w=$('#ev');w.innerHTML='';ev.forEach((e,i)=>{const b=d
    im.onpointerup=()=>{im.onpointermove=null}}
  }
  w.appendChild(b)})}
+const FS={'Tajawal':'Tajawal:wght@200;300;400;500;700;800;900','Cairo':'Cairo:wght@200..1000','Almarai':'Almarai:wght@300;400;700;800','Amiri':'Amiri:wght@400;700','Noto Naskh Arabic':'Noto+Naskh+Arabic:wght@400..700','Noto Kufi Arabic':'Noto+Kufi+Arabic:wght@100..900','Reem Kufi':'Reem+Kufi:wght@400..700','El Messiri':'El+Messiri:wght@400..700','Changa':'Changa:wght@200..800','IBM Plex Sans Arabic':'IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700'},LF={};
+const fnt=()=>{const n=$('#ff').value,r=document.documentElement.style;if(FS[n]&&!LF[n]&&n!='Tajawal'){LF[n]=1;const l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family='+FS[n]+'&display=swap';document.head.appendChild(l)}
+ r.setProperty('--ff',"'"+n+"'");r.setProperty('--fw',$('#fw').value);r.setProperty('--fs',$('#fs').value/100)};
+$('#ff').onchange=$('#fw').oninput=$('#fs').oninput=fnt;
 const sz=()=>{const r=document.documentElement.style;r.setProperty('--ih',$('#ih').value+'px');r.setProperty('--fit',$('#ft').value)};
 $('#ih').oninput=sz;$('#ft').onchange=()=>{sz();renderEv()};
-const get=()=>{const d={id:cur||('r'+Date.now()),saved:Date.now(),ev,ih:$('#ih').value,fit:$('#ft').value};fields().forEach(f=>d[f.dataset.k]=f.value);return d};
-const set=d=>{if(d.type=='اسم التقرير')d.type='تقرير';cur=d.id;fields().forEach(f=>f.value=d[f.dataset.k]||(f.tagName=='SELECT'?f.options[0].value:''));ev=d.ev&&d.ev.length?d.ev:[{},{},{},{}];$('#ih').value=d.ih||240;$('#ft').value=d.fit||'cover';sz();renderEv();grow();tl()};
+const get=()=>{const d={id:cur||('r'+Date.now()),saved:Date.now(),ev,ih:$('#ih').value,fit:$('#ft').value,ff:$('#ff').value,fw:$('#fw').value,fs:$('#fs').value};fields().forEach(f=>d[f.dataset.k]=f.value);return d};
+const set=d=>{if(d.type=='اسم التقرير')d.type='تقرير';cur=d.id;fields().forEach(f=>f.value=d[f.dataset.k]||(f.tagName=='SELECT'?f.options[0].value:''));ev=d.ev&&d.ev.length?d.ev:[{},{},{},{}];if(d.ff)$('#ff').value=d.ff;if(d.fw)$('#fw').value=d.fw;if(d.fs)$('#fs').value=d.fs;fnt();$('#ih').value=d.ih||240;$('#ft').value=d.fit||'cover';sz();renderEv();grow();tl()};
 const tl=()=>{const v=$('[data-k=type]').value;$('#nl').textContent=v=='تقرير'?'اسم التقرير':'اسم '+v;$('[data-k=name]').placeholder='اكتب '+$('#nl').textContent};
 $('[data-k=type]').onchange=tl;
 $('#ae').onclick=()=>{ev.push({});renderEv()};
